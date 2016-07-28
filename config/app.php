@@ -154,6 +154,11 @@ return [
          * Entrust
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+        
+        /*
+         * Flash
+         */
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*
