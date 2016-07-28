@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Proyecto;
+use Carbon\Carbon;
 
-class PagesController extends Controller
+class ProyectosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function index()
     {
-        return view('pages.home');
+        return view('proyectos.index')
+                ->with('proyectos', Proyecto::paginate(20));
     }
 
     /**
@@ -26,7 +29,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('proyectos.create');
     }
 
     /**
@@ -37,7 +40,10 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proyecto = new Proyecto();
+        $proyecto->create($request->all());
+        dd($proyecto);
+        return response()->json(['path' => route('proyecto.show', $proyecto)]);
     }
 
     /**
@@ -48,7 +54,8 @@ class PagesController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('proyectos.show')
+                ->with('proyecto', Proyecto::find($id));
     }
 
     /**
@@ -59,7 +66,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('proyectos.edit')
+                ->with('proyecto', Proyecto::find($id));
     }
 
     /**
@@ -82,6 +90,8 @@ class PagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Proyecto::destroy($id);
+        Flash::success('Proyecto eliminado con éxito');
+        return redirect()->back();
     }
 }

@@ -1,2 +1,3 @@
 @extends('layout')
-HOME
+@section('content')
+@stop

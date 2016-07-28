@@ -159,6 +159,11 @@ return [
          * Flash
          */
         Laracasts\Flash\FlashServiceProvider::class,
+        
+        /*
+         * Collective HTML & FORMS 
+         */
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -208,6 +213,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         // Entrust
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        // Collective HTML & FORMS
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
 
     ],
 

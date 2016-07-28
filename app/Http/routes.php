@@ -10,9 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::resource('proyecto', 'ProyectosController');
 
 Route::get('/', 'PagesController@home')->name('home');
-Route::get('proyectos/', 'PagesController@proyectos')->name('proyectos');
 
 //Autenticación
 Route::get('auth/login', [
