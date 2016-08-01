@@ -3,25 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as R;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Ghi\Core\Models\User;
+use Illuminate\Support\Facades\DB;
 
-class PagesController extends Controller
+class UsersController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function index(Request $request)
     {
-        return view('pages.home');
+        if(R::ajax()){
+            $busqueda = $request->get('q');
+            $users = User::select(DB::raw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) AS full_name"))
+                    ->whereRaw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) LIKE '%$busqueda%'")
+                    ->lists("full_name");
+            return response()->json($users)                
+                ->setCallback($request->input('callback'));
+        }   
     }
 
     /**

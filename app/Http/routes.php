@@ -11,6 +11,13 @@
 |
 */
 Route::resource('proyecto', 'ProyectosController');
+Route::resource('solicitudes.documentos', 'DocumentosController');
+
+Route::resource('proyectos.solicitudes', 'SolicitudesController');
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('users', 'UsersController@index');
+});
 
 Route::get('/', 'PagesController@home')->name('home');
 

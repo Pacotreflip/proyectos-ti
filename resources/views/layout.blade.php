@@ -9,10 +9,14 @@
 
     <title>Proyectos TI</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link href="{{ asset('css/scrolling-nav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+    @include('scripts.globals')
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,6 +44,7 @@
 
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -47,6 +52,22 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/scrolling-nav.js') }}"></script>
+    
+    <!-- Sweetalert JavaScript -->
+    <script src="{{ asset('js/sweetalert-dev.js') }}"></script>
+    
+    <!-- Dropzone JavaScript -->
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+
+    <script>
+      $(function () {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });    
+      });
+    </script>
 @yield('scripts')
 
 </body>

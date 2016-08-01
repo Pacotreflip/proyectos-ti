@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Proyecto;
-use Carbon\Carbon;
+use App\Models\Solicitud;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Requests\StoreProyectoRequest;
 
 class ProyectosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -38,12 +46,36 @@ class ProyectosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProyectoRequest $request)
     {
-        $proyecto = new Proyecto();
-        $proyecto->create($request->all());
-        dd($proyecto);
-        return response()->json(['path' => route('proyecto.show', $proyecto)]);
+        try {
+            DB::connection('proyectos_ti')->beginTransaction();
+            
+            $proyecto = New Proyecto();
+            $proyecto->nombre = $request->get('nombre');
+            $proyecto->fecha_inicio = $request->get('fecha_inicio');
+            $proyecto->fecha_fin = $request->get('fecha_fin');
+            $proyecto->descripcion = $request->get('descripcion');
+            $proyecto->objetivo = $request->get('objetivo');
+            $proyecto->save();
+
+            $solicitud = New Solicitud();
+            $solicitud->id_proyecto = $proyecto->id;
+            $solicitud->fecha = $request->get('fecha_solicitud');
+            $solicitud->tipo = 1;
+            $solicitud->solicitante = $request->get('solicitante');
+            $solicitud->objetivo = $request->get('objetivo');
+            $solicitud->descripcion = $request->get('descripcion');
+            $solicitud->save();
+            
+            DB::connection('proyectos_ti')->commit();
+            
+        } catch (Exception $ex) {
+            DB::connection('proyectos_ti')->rollBack();
+            throw $ex;
+        }       
+        
+        return redirect(route('proyecto.show', $proyecto));
     }
 
     /**

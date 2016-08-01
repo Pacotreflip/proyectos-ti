@@ -6,22 +6,26 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
+use App\Http\Requests\StoreDocumentoRequest;
+use App\Models\Documento;
 
-class PagesController extends Controller
+class DocumentosController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function index()
     {
-        return view('pages.home');
+        //
     }
 
     /**
@@ -31,7 +35,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -40,9 +44,21 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreDocumentoRequest $request, $id_solicitud)
+    {        
+        $file = $request->file('documento');
+
+        $extension = $file->getClientOriginalExtension();
+        $directory = public_path('uploads/documentos/');
+        $filename = sha1(time().time()).".{$extension}";
+
+        $upload_success = $request->file('documento')->move($directory, $filename);
+
+        if( $upload_success ) {
+            return response()->json('success', 200);
+        } else {
+            return response()->json('error', 400);
+	}
     }
 
     /**

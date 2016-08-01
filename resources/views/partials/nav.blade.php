@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Proyectos TI</a>
+            <a class="navbar-brand page-scroll" href="/">PROYECTOS TI</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,6 +17,15 @@
                 <li class="hidden">
                     <a class="page-scroll" href="#page-top"></a>
                 </li>
+                @if(isset($proyecto))
+                @include('partials.nav-app')
+                @else
+                @if(auth()->check())
+                <li>
+                    <a class="page-scroll" href="{{ route('proyecto.index') }}">Ver Proyectos</a>
+                </li>
+                @endif
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->

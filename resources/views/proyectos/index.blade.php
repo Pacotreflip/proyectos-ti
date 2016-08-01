@@ -9,15 +9,15 @@
 <div class="row">
   <div class="col-md-6">
     <ul class="list-group">
-    @foreach($proyectos as $key => $proyecto )
+    @foreach($proyectos as $key => $p )
     @if(($key + 1) % 10 == 0 && $key != 0)
-      <a href="{{ route('proyecto.show', $proyecto->id) }}" class="list-group-item"><i class="pull-left fa fa-folder"></i><strong> {{ $proyecto->nombre }}<strong> <small>{{ $proyecto->descripcion }}</small></a>
+      <a href="{{ route('proyecto.show', $p->id) }}" class="list-group-item"><i class="pull-left fa fa-folder"></i><strong> {{ $p->nombre }}<strong> <small>{{ $p->descripcion }}</small></a>
     </ul>
   </div>
   <div class="col-md-6">
     <ul class="list-group">
     @else
-      <a href="{{ route('proyecto.show', $proyecto->id) }}" class="list-group-item"><i class="pull-left fa fa-folder"></i><strong> {{ $proyecto->nombre }}<strong> <small>{{ $proyecto->descripcion }}</small></a>
+      <a href="{{ route('proyecto.show', $p->id) }}" class="list-group-item"><i class="pull-left fa fa-folder"></i><strong> {{ $p->nombre }}<strong> <small>{{ $p->descripcion }}</small></a>
     @endif
     @endforeach
   </div>
