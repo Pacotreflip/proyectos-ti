@@ -12,7 +12,6 @@
 */
 Route::resource('proyecto', 'ProyectosController');
 Route::resource('solicitudes.documentos', 'DocumentosController');
-
 Route::resource('proyectos.solicitudes', 'SolicitudesController');
 
 Route::group(['prefix' => 'api'], function () {

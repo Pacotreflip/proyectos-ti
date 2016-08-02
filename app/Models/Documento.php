@@ -14,14 +14,4 @@ class Documento extends Model
     public function solicitud() {
         return $this->belongsTo(Solicitud::class, 'id_solicitud');
     }
-     
-    public function setNombreAttribute($nombre) {
-        $this->attributes['nombre'] = $nombre;
-        $this->path = $this->baseDir() . "/" . $nombre;
-        $this->thumbnail_path = $this->baseDir() . "/tn-" . $nombre;
-    }
-    
-    public function baseDir() {
-        return 'uploads/documentos';
-    }
 }

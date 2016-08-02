@@ -10,7 +10,9 @@
         "ghi/laravel-intranet-auth": "~1.0",
         "zizaco/entrust": "5.2.x-dev",
         "laracasts/flash": "^2.0",
-        "laravelcollective/html": "5.1.*"
+        "laravelcollective/html": "5.1.*",
+        "intervention/image": "^2.3"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

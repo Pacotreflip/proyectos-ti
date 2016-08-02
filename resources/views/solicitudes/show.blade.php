@@ -24,6 +24,39 @@
                 Documentos o especificaciones técnicas que se anexan como apoyo al requerimiento
             </div>
             <div class="panel-body">
+                @foreach($solicitud->documentos->chunk(100) as $documentoset)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre del Archivo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($documentoset as $documento)
+                            <tr>
+                                <td>
+                                    <a href="/{{ $documento->path }}" target="_blank">
+                                        {{ $documento->nombre }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('solicitudes.documentos.destroy', [$solicitud, $documento])}}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-xs btn-danger" ><i class="fa fa-times"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @endforeach
+                @unless(count($solicitud->documentos))
+                <div class="alert alert-info">Esta solicitud no tiene documentos.</div>
+                @endunless 
             </div>
         </div>
     </div>

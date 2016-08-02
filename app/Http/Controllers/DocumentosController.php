@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\StoreDocumentoRequest;
 use App\Models\Documento;
+use App\Models\Solicitud;
+use Intervention\Image\Facades\Image;
 
 class DocumentosController extends Controller
 {
@@ -45,20 +47,24 @@ class DocumentosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDocumentoRequest $request, $id_solicitud)
-    {        
+    {   
+        $solicitud = Solicitud::findOrFail($id_solicitud);
         $file = $request->file('documento');
-
         $extension = $file->getClientOriginalExtension();
-        $directory = public_path('uploads/documentos/');
+        $directory = 'uploads/documentos/';
         $filename = sha1(time().time()).".{$extension}";
+        $nombre = $file->getClientOriginalName();
+        $documento = new Documento();
+        $documento->nombre = $nombre;
+        $documento->path = $directory . $filename;        
+        $file->move($directory, $filename);
 
-        $upload_success = $request->file('documento')->move($directory, $filename);
-
-        if( $upload_success ) {
-            return response()->json('success', 200);
-        } else {
-            return response()->json('error', 400);
-	}
+        $documento->id_solicitud = $solicitud->id;
+        $documento->save();
+        
+        if ($request->ajax()) {
+            return response()->json($documento->path);
+        }
     }
 
     /**
@@ -90,7 +96,7 @@ class DocumentosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id_solicitud, $id)
     {
         //
     }
@@ -101,8 +107,18 @@ class DocumentosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_solicitud, $id)
     {
-        //
+       $documento = Documento::findOrFail($id);
+        $files = in_array($documento->thumbnail_path, [
+            'uploads/documentos/pdf.png',
+            'uploads/documentos/doc.png',
+            'uploads/documentos/xls.png'
+        ]) ? [$documento->path] : [$documento->path, $documento->thumbnail_path];
+
+        $documento->delete();
+        File::delete($files);
+
+        return back(); 
     }
 }
