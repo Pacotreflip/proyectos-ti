@@ -14,9 +14,5 @@ class Proyecto extends Model
     public function solicitudes() {
         return $this->hasMany(Solicitud::class, 'id_proyecto');
     }
-    
-    public function getDateFormat() {
-        return 'Y-d-m H:i:s';
-    }
 }
 

@@ -54,6 +54,7 @@ class SolicitudesController extends Controller
         $solicitud->solicitante = $request->get('solicitante');
         $solicitud->objetivo = $request->get('objetivo');
         $solicitud->descripcion = $request->get('descripcion');
+        $solicitud->id_usuario = auth()->user()->idusuario;
         $solicitud->save();
                 
         return redirect(route('proyectos.solicitudes.show', [$proyecto,$solicitud]));

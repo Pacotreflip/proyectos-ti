@@ -17,10 +17,10 @@ class CreateSolicitudesTable extends Migration
             $table->integer('id_proyecto')->unsigned();
             $table->date('fecha');
             $table->integer('tipo');
-            $table->text('solicitante');
-            $table->text('objetivo');
-            $table->text('descripcion');
-            
+            $table->string('solicitante');
+            $table->string('objetivo');
+            $table->string('descripcion');
+            $table->integer('id_usuario');
             $table->timestamps();
             
             /*

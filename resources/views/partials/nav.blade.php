@@ -27,6 +27,9 @@
                 @endif
                 @endif
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @include ('partials.nav-user')
+            </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>

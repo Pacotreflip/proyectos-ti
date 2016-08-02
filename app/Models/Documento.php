@@ -9,24 +9,19 @@ class Documento extends Model
     protected $table = 'documentos';
     protected $connection = 'proyectos_ti';
     protected $dates = ['created_at', 'updated_at'];
-    protected $fillable = ['name', 'path', 'thumbnail', 'id_solicitante', 'objetivo', 'descripcion'];
+    protected $fillable = ['nombre', 'path', 'thumbnail_path'];
     
-    public function proyecto() {
-        return $this->belongsTo(Proyecto::class);
+    public function solicitud() {
+        return $this->belongsTo(Solicitud::class, 'id_solicitud');
+    }
+     
+    public function setNombreAttribute($nombre) {
+        $this->attributes['nombre'] = $nombre;
+        $this->path = $this->baseDir() . "/" . $nombre;
+        $this->thumbnail_path = $this->baseDir() . "/tn-" . $nombre;
     }
     
-    public function solicitante() {
-        return \Ghi\Core\Models\User::find($this->id_solicitante);  
-    }
-
-    public function getDateFormat() {
-        return 'Y-d-m H:i:s';
-    }
-    
-    public static function tipos() {
-        return [
-            2 => 'MODIFICACIÓN',
-            3 => 'MANTENIMIENTO'
-        ];
+    public function baseDir() {
+        return 'uploads/documentos';
     }
 }

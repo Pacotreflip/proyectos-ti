@@ -52,20 +52,22 @@ class ProyectosController extends Controller
             DB::connection('proyectos_ti')->beginTransaction();
             
             $proyecto = New Proyecto();
-            $proyecto->nombre = $request->get('nombre');
-            $proyecto->fecha_inicio = $request->get('fecha_inicio');
-            $proyecto->fecha_fin = $request->get('fecha_fin');
-            $proyecto->descripcion = $request->get('descripcion');
-            $proyecto->objetivo = $request->get('objetivo');
+            $proyecto->nombre = $request->nombre;
+            $proyecto->fecha_inicio = $request->fecha_inicio;
+            $proyecto->fecha_fin = $request->fecha_fin;
+            $proyecto->descripcion = $request->descripcion;
+            $proyecto->objetivo = $request->objetivo;
+            $proyecto->id_usuario = auth()->user()->idusuario;
             $proyecto->save();
 
             $solicitud = New Solicitud();
             $solicitud->id_proyecto = $proyecto->id;
-            $solicitud->fecha = $request->get('fecha_solicitud');
+            $solicitud->fecha = $request->fecha_solicitud;
             $solicitud->tipo = 1;
-            $solicitud->solicitante = $request->get('solicitante');
-            $solicitud->objetivo = $request->get('objetivo');
-            $solicitud->descripcion = $request->get('descripcion');
+            $solicitud->solicitante = $request->solicitante;
+            $solicitud->objetivo = $request->objetivo;
+            $solicitud->descripcion = $request->descripcion;
+            $solicitud->id_usuario = auth()->user()->idusuario;
             $solicitud->save();
             
             DB::connection('proyectos_ti')->commit();
@@ -75,7 +77,7 @@ class ProyectosController extends Controller
             throw $ex;
         }       
         
-        return redirect(route('proyecto.show', $proyecto));
+        return redirect(route('proyectos.solicitudes.show', [$proyecto, $solicitud]));
     }
 
     /**

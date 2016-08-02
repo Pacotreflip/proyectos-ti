@@ -29,7 +29,7 @@
                 <td>{{ $solicitud->fecha->format('d-m-Y') }}</td>
                 <td>{{ $solicitud->descripcion }}</td>               
                 <td>{{ $solicitud->solicitante }}</td>
-                <td class="{{ $solicitud->tipo == 1 ? 'success' : ($solicitud->tipo == 2 ? 'primary' : 'warning') }}">
+                <td class="{{ $solicitud->tipo == 1 ? 'success' : ($solicitud->tipo == 2 ? 'info' : 'warning') }}">
                     {{ $solicitud->present()->tipo_solicitud }}
                 </td>
             </tr>

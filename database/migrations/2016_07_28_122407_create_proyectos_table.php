@@ -19,6 +19,7 @@ class CreateProyectosTable extends Migration
             $table->string('objetivo');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
+            $table->integer('id_usuario');
             $table->timestamps();
         });
     }
