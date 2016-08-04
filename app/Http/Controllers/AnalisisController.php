@@ -8,21 +8,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Proyectos\Proyecto;
 
-class PagesController extends Controller
+class AnalisisController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function index()
     {
-        return view('pages.home');
+        //
     }
 
     /**
@@ -30,14 +25,9 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function etapas($id_proyecto)
+    public function create()
     {
-        $proyecto = Proyecto::findOrFail($id_proyecto);
-        $etapas = $proyecto->etapas();
-        
-        return view('etapas.index')
-        ->with('etapas', $etapas)
-        ->with('proyecto', $proyecto);
+        //
     }
 
     /**
@@ -57,9 +47,14 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_proyecto)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id_proyecto);
+        
+        return view('analisis.show')
+                ->with('proyecto', $proyecto)
+                ->with('analisis', $proyecto->analisis)
+                ->with('preguntas', ['¿Como Te Llamas?', '¿Cuantos Años Tienes?']);
     }
 
     /**

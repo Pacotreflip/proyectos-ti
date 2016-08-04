@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Solicitud;
-use App\Models\Proyecto;
+use App\Models\Solicitudes\Solicitud; 
+use App\Models\Proyectos\Proyecto;
+use App\Http\Requests\StoreSolicitudRequest;
 
 class SolicitudesController extends Controller
 {
@@ -44,7 +45,7 @@ class SolicitudesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id_proyecto)
+    public function store(StoreSolicitudRequest $request, $id_proyecto)
     {
         $proyecto = Proyecto::find($id_proyecto);
         $solicitud = new Solicitud();
@@ -57,7 +58,7 @@ class SolicitudesController extends Controller
         $solicitud->id_usuario = auth()->user()->idusuario;
         $solicitud->save();
                 
-        return redirect(route('proyectos.solicitudes.show', [$proyecto,$solicitud]));
+        return redirect(route('proyecto.solicitudes.show', [$proyecto,$solicitud]));
     }
 
     /**

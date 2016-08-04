@@ -24,7 +24,11 @@ class StoreSolicitudRequest extends Request
     public function rules()
     {
         return [
-            //
+            'tipo' => 'required',
+            'fecha' => 'required|date',
+            'solicitante' => 'required',
+            'objetivo' => 'required',
+            'descripcion' => 'required'
         ];
     }
 }

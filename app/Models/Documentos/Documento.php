@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Documentos;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Solicitudes\Solicitud;
 
 class Documento extends Model
 {

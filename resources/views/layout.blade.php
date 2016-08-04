@@ -15,6 +15,7 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
     @include('scripts.globals')
 
 
@@ -58,6 +59,9 @@
     
     <!-- Dropzone JavaScript -->
     <script src="{{ asset('js/dropzone.js') }}"></script>
+
+    <!-- Select2 JavaScript -->
+    <script src="{{ asset('js/select2.full.js') }}"></script>
 
     <script>
       $(function () {

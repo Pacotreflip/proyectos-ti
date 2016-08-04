@@ -2,8 +2,19 @@
 
 @section('content')
 <h1>Nueva Solicitud <small>({{ $proyecto->nombre }})</small></h1>
+{!! Breadcrumbs::render('proyecto.solicitudes.create', $proyecto) !!}
 <hr>
-{!! Form::open(['route' => ['proyectos.solicitudes.store', $proyecto->id], 'method' => 'POST', 'class' => 'form-horizontal']) !!}   
+
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+{!! Form::open(['route' => ['proyecto.solicitudes.store', $proyecto->id], 'method' => 'POST', 'class' => 'form-horizontal']) !!}   
     <div class="form-group">
         {!! Form::label('fecha', 'Fecha de Solicitud', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
@@ -11,7 +22,7 @@
         </div>
         {!! Form::label('tipo', 'Tipo de Solicitud', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::select('tipo', \App\Models\Solicitud::tipos(), null, ['class' => 'form-control', 'placeholder' => '-- SELECCIONE EL TIPO--']) !!}
+            {!! Form::select('tipo', \App\Models\Solicitudes\Solicitud::tipos(), null, ['class' => 'form-control', 'placeholder' => '-- SELECCIONE EL TIPO--']) !!}
         </div>
     </div>
 
@@ -23,7 +34,7 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('objetivo', 'Objetivo del Sistema:', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('objetivo', 'Objetivo de la Solicitud:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-md-4 col-sm-10">
             {!! Form::textarea('objetivo', '', ['class' => 'form-control', 'size' => '30x5']) !!}
         </div>
@@ -40,7 +51,7 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit('Guardar', ['class' => 'btn btn-success']) !!}
-        <a id="cancelar" href="{{ route('proyectos.solicitudes.index', $proyecto->id) }}" class="btn btn-danger">Cancelar</a>
+        <a id="cancelar" href="{{ route('proyecto.solicitudes.index', $proyecto->id) }}" class="btn btn-danger">Cancelar</a>
       </div>
     </div>
 {!! Form::close() !!}

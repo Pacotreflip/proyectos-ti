@@ -3,8 +3,9 @@
 @section('content')
 <h1>
     Solicitudes <small>({{ $proyecto->nombre }})</small>
-    <a href="{{ route('proyectos.solicitudes.create', $proyecto->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Nueva Solicitud</a>
+    <a href="{{ route('proyecto.solicitudes.create', $proyecto->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Nueva Solicitud</a>
 </h1>
+{!! Breadcrumbs::render('proyecto.solicitudes.index', $proyecto) !!}
 <hr>
 <div class="table-responsive">
     @if(count($proyecto->solicitudes))
@@ -22,7 +23,7 @@
             @foreach($proyecto->solicitudes as $solicitud)
             <tr>
                 <td>
-                    <a href="{{ route('proyectos.solicitudes.show', [$proyecto,$solicitud]) }}">
+                    <a href="{{ route('proyecto.solicitudes.show', [$proyecto,$solicitud]) }}">
                         {{ $solicitud->id }}
                     </a>
                 </td>

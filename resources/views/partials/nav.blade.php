@@ -22,7 +22,7 @@
                 @else
                 @if(auth()->check())
                 <li>
-                    <a class="page-scroll" href="{{ route('proyecto.index') }}">Ver Proyectos</a>
+                    <a class="page-scroll" href="{{ route('proyectos.index') }}">Ver Proyectos</a>
                 </li>
                 @endif
                 @endif

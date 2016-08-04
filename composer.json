@@ -11,7 +11,8 @@
         "zizaco/entrust": "5.2.x-dev",
         "laracasts/flash": "^2.0",
         "laravelcollective/html": "5.1.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "davejamesmiller/laravel-breadcrumbs": "^3.0"
 
     },
     "require-dev": {

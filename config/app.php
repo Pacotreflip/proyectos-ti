@@ -169,6 +169,11 @@ return [
          * Intervention Image
          */
         Intervention\Image\ImageServiceProvider::class,
+        
+        /*
+         * Laravel Breadcrumbs
+         */
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     ],
 
     /*
@@ -223,7 +228,9 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         // Intervention Image
         'Image'     => Intervention\Image\Facades\Image::class,
-
+        
+        // Laravel Breadcrumbs
+        'Breadcrumbs'   => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

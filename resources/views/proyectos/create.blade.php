@@ -2,7 +2,9 @@
 
 @section('content')
 <h2>Nuevo Proyecto TI</h2>
+{!! Breadcrumbs::render('proyectos.create') !!}
 <hr>
+
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -13,29 +15,9 @@
     </div>
 @endif
 
-{!! Form::open(['route' => 'proyecto.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}   
+{!! Form::open(['route' => 'proyectos.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}   
     
-    <h3>Información de la Solicitud</h3>
     
-    <div class="form-group">
-      {!! Form::label('fecha_solicitud', 'Fecha de Solicitud: ', ['class' => 'col-sm-2 control-label']) !!}
-      <div class="col-sm-4">
-        {!! Form::date('fecha_solicitud', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}       
-      </div>
-      {!! Form::label('tipo_solicitud', 'Tipo de Solicitud: ', ['class' => 'col-sm-2 control-label']) !!}
-      <div class="col-sm-4">
-        {!! Form::text('tipo_solicitud', 'NUEVO SISTEMA', ['class' => 'form-control', 'disabled']) !!}       
-      </div>
-    </div>
-    <div class="form-group">
-        {!! Form::label('solicitante', 'Nombre del Solicitante', ['class' => 'col-sm-2 control-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('solicitante', '', ['class' => 'form-control']) !!}
-        </div>
-    </div>
-    
-    <hr>
-
     <h3>Información del Proyecto</h3>
 
     <div class="form-group">
@@ -69,12 +51,32 @@
         {!! Form::textarea('objetivo', '', ['class' => 'form-control', 'size' => '5x2']) !!}       
       </div>
     </div>
-
+    <hr>
+    
+    <h3>Información de la Solicitud</h3>
+    <div class="form-group">
+        {!! Form::label('solicitante', 'Nombre del Solicitante', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::text('solicitante', '', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+      {!! Form::label('fecha_solicitud', 'Fecha de Solicitud: ', ['class' => 'col-sm-2 control-label']) !!}
+      <div class="col-sm-4">
+        {!! Form::date('fecha_solicitud', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}       
+      </div>
+      {!! Form::label('tipo_solicitud', 'Tipo de Solicitud: ', ['class' => 'col-sm-2 control-label']) !!}
+      <div class="col-sm-4">
+        {!! Form::text('tipo_solicitud', 'NUEVO SISTEMA', ['class' => 'form-control', 'disabled']) !!}       
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
       </div>
     </div>
+    
+    
   {!! Form::close() !!}
 @stop
 @section('scripts')
