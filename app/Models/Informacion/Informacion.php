@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Models\Proyectos;
+namespace App\Models\Informacion;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Analisis\Analisis;
-use App\Models\Solicitudes\Solicitud;
-use App\Models\Disenos\Diseno;
 
 class Proyecto extends Model
 {
-    protected $table = 'proyectos';
+    protected $table = 'informacion';
     protected $connection = 'proyectos_ti';
-    protected $dates = ['fecha_inicio', 'fecha_fin'];
+    protected $dates = [''];
     protected $fillable = ['nombre', 'descripcion', 'objetivo', 'fecha_inicio', 'fecha_fin'];
 
     public function analisis() {

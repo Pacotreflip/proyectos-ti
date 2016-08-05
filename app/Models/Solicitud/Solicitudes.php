@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace App\Models\Solicitudes;
+namespace App\Models\Solicitud;
 
 /**
  * Description of Solicitudes

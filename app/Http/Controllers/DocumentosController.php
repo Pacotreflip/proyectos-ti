@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Input;
 use App\Http\Requests\StoreDocumentoRequest;
-use App\Models\Documentos\Documento;
-use App\Models\Solicitudes\Solicitud;
-use Intervention\Image\Facades\Image;
+use App\Models\Documento\Documento;
+use App\Models\Solicitud\Solicitud;
 
 class DocumentosController extends Controller
 {

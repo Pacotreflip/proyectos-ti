@@ -13,15 +13,16 @@
 Route::resource('proyectos', 'ProyectosController');
 Route::resource('solicitud.documentos', 'DocumentosController');
 Route::resource('proyecto.solicitudes', 'SolicitudesController');
-Route::resource('analisis.cuestionarios', 'CuestionariosController');
+Route::resource('analisis.informacion', 'InformacionController');
 
 //Etapas
 Route::get('proyecto/{proyecto}/etapas', 'PagesController@etapas')->name('proyecto.etapas.index');
+Route::get('proyecto/{proyecto}/etapas/edit', 'PagesController@etapas_edit')->name('proyecto.etapas.edit');
 
 //Análisis
 Route::get('proyecto/{proyecto}/analisis', 'AnalisisController@show')->name('proyecto.analisis.show');
 Route::get('proyecto/{proyecto}/analisis/edit', 'AnalisisController@edit')->name('proyecto.analisis.edit');
-Route::patch('proyecto/{proyecto}/analisis/update', 'AnalisisController@edit')->name('proyecto.analisis.update');
+Route::patch('proyecto/{proyecto}/analisis/update', 'AnalisisController@update')->name('proyecto.analisis.update');
 
 //Diseño
 Route::get('proyecto/{proyecto}/diseno', 'DisenosController@show')->name('proyecto.diseno.show');

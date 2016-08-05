@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Proyectos\Proyecto;
+use App\Models\Proyecto\Proyecto;
 
 class PagesController extends Controller
 {
@@ -68,9 +68,12 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function etapas_edit($id_proyecto)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id_proyecto);
+        
+        return view('etapas.edit')
+                ->withProyecto($proyecto);
     }
 
     /**

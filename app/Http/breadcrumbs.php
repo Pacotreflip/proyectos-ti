@@ -38,6 +38,12 @@ Breadcrumbs::register('proyecto.etapas.index', function($breadcrumbs, $proyecto)
     $breadcrumbs->push('ETAPAS', route('proyecto.etapas.index', $proyecto));
 });
 
+Breadcrumbs::register('proyecto.etapas.edit', function($breadcrumbs, $proyecto)
+{
+    $breadcrumbs->parent('proyecto.etapas.index', $proyecto);
+    $breadcrumbs->push('PROGRAMACIÓN', route('proyecto.etapas.edit', $proyecto));
+});
+
 Breadcrumbs::register('proyecto.analisis.show', function($breadcrumbs, $proyecto)
 {
     $breadcrumbs->parent('proyecto.etapas.index', $proyecto);

@@ -3,7 +3,7 @@
 namespace App\Models\Analisis;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Proyectos\Proyecto;
+use App\Models\Proyecto\Proyecto;
 
 class Analisis extends Model
 {

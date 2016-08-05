@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocumentosTable extends Migration
+class CreateCatPreguntasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateDocumentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('documentos', function (Blueprint $table) {
+        Schema::create('cat_preguntas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('path');
+            $table->string('pregunta');
+            $table->integer('opcional')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateDocumentosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('documentos');
+        Schema::drop('cat_preguntas');
     }
 }

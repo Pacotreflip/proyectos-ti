@@ -6,11 +6,11 @@
  * and open the template in the editor.
  */
 
-namespace App\Models\Proyectos;
+namespace App\Models\Proyecto;
 
-use App\Models\Solicitudes\Solicitud;
+use App\Models\Solicitud\Solicitud;
 use App\Models\Analisis\Analisis;
-use App\Models\Disenos\Diseno;
+use App\Models\Diseno\Diseno;
 use Illuminate\Support\Facades\DB;
 
 /**

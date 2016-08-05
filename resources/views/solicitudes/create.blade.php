@@ -22,7 +22,7 @@
         </div>
         {!! Form::label('tipo', 'Tipo de Solicitud', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::select('tipo', \App\Models\Solicitudes\Solicitud::tipos(), null, ['class' => 'form-control', 'placeholder' => '-- SELECCIONE EL TIPO--']) !!}
+            {!! Form::select('tipo', \App\Models\Solicitud\Solicitud::tipos(), null, ['class' => 'form-control', 'placeholder' => '-- SELECCIONE EL TIPO--']) !!}
         </div>
     </div>
 
@@ -69,6 +69,9 @@
                 },
                 success: function(data) {
                     response( data );
+                },
+                error: function(error) {
+                    
                 }
             });
         }

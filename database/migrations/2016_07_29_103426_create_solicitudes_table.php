@@ -21,15 +21,14 @@ class CreateSolicitudesTable extends Migration
             $table->string('objetivo');
             $table->string('descripcion');
             $table->integer('id_usuario');
+            $table->integer('estado')->default(0);
+
             $table->timestamps();
             
             /*
              * Foreign keys
              */
-            $table->foreign('id_proyecto')
-                ->references('id')
-                ->on('proyectos')
-                ->onDelete('cascade');
+            $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade');
         });
     }
 

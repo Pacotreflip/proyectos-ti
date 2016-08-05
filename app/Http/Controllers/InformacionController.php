@@ -6,17 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Proyecto\Proyecto;
-use App\Models\Proyecto\Proyectos;
-use App\Http\Requests\StoreProyectoRequest;
+use App\Models\Analisis\Analisis;
 
-class ProyectosController extends Controller
+class InformacionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +17,7 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-        return view('proyectos.index')
-                ->with('proyectos', Proyecto::paginate(20));
+        //
     }
 
     /**
@@ -33,9 +25,11 @@ class ProyectosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_analisis)
     {
-        return view('proyectos.create');
+        $analisis = Analisis::findOrFail($id_analisis);
+        return view('informacion.create')
+                ->with('analisis', $analisis);
     }
 
     /**
@@ -44,10 +38,9 @@ class ProyectosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProyectoRequest $request)
+    public function store(Request $request)
     {
-        $data = (new Proyectos($request->all()))->create();    
-        return redirect(route('proyecto.solicitudes.show', [$data['proyecto'], $data['solicitud']]));
+        //
     }
 
     /**
@@ -58,8 +51,7 @@ class ProyectosController extends Controller
      */
     public function show($id)
     {
-        return view('proyectos.show')
-                ->with('proyecto', Proyecto::find($id));
+        //
     }
 
     /**
@@ -70,8 +62,7 @@ class ProyectosController extends Controller
      */
     public function edit($id)
     {
-        return view('proyectos.edit')
-                ->with('proyecto', Proyecto::find($id));
+        //
     }
 
     /**
@@ -94,8 +85,6 @@ class ProyectosController extends Controller
      */
     public function destroy($id)
     {
-        Proyecto::destroy($id);
-        Flash::success('Proyecto eliminado con éxito');
-        return redirect()->back();
+        //
     }
 }

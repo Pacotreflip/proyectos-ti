@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Proyectos\Proyecto;
+use App\Models\Proyecto\Proyecto;
+use Laracasts\Flash\Flash;
 
 class AnalisisController extends Controller
 {
@@ -50,12 +51,14 @@ class AnalisisController extends Controller
     public function show($id_proyecto)
     {
         $proyecto = Proyecto::findOrFail($id_proyecto);
-        
+        if(is_null($proyecto->analisis->fecha_inicio ) || is_null($proyecto->analisis->fecha_inicio )) {
+            Flash::warning('Por favor establezca las fechas de inicio y fin estimadas para cada etapa del proyecto');
+            return redirect()->route('proyecto.etapas.edit', $proyecto);
+        }
         return view('analisis.show')
                 ->with('proyecto', $proyecto)
-                ->with('analisis', $proyecto->analisis)
-                ->with('preguntas', ['¿Como Te Llamas?', '¿Cuantos Años Tienes?']);
-    }
+                ->with('analisis', $proyecto->analisis);
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +80,7 @@ class AnalisisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all(), $id);
     }
 
     /**

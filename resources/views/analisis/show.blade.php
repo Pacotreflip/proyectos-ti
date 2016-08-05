@@ -6,41 +6,32 @@
 <hr>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
-    <a href="#informacion" class="btn btn-default">Información</a>
+    <button type="button" class="btn btn-default" id="informacion">Información</button>
   </div>
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default">Middle</button>
+    <button type="button" class="btn btn-default" id="documentacion">Documentación</button>
   </div>
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default">Right</button>
+    <button type="button" class="btn btn-default" id="requerimientos">Requerimientos</button>
   </div>
 </div>
-<section class="first-section" id="informacion">
-  <h2>1.1 Información</h2>
-  {!! Form::open() !!}
-  <div class="form-group">
-    {!! Form::label('preguntas', 'Seleccione una pregunta de la lista:', ['class' => 'col-md-3']) !!}
-    <div class="col-md-9">
-    {!! Form::select('preguntas', $preguntas, null, ['class' => 'form-control', 'placeholder' => '--SELECCIONE UNA PREGUNTA--']) !!}
-    </div>
-  </div>
-  {!! Form::close() !!}
+<section id="content" class="second-section">
 </section>
 
 @stop
 @section('scripts')
 <script>
-    $('select[name=preguntas]').select2({
-        width: '100%'
-    });
-    $('select[name=preguntas]').on('select2:select', function (e) {
-        $.ajax({
-           url: '{{ route("analisis.cuestionarios.create", $analisis)}}',
-           type: 'GET',
-           success: function (source) {
-               
-           }
-        });
-    });
+  $('#informacion').off().on('click', function (e) {
+      $.ajax({
+        url: '{{ route("analisis.informacion.show", $analisis)}}',
+        type: 'GET',
+        success: function (source) {
+          $('#content').html(source);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus);
+        }
+      });
+  }
 </script>
 @stop

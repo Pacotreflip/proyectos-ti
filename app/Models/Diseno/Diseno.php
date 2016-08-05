@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Disenos;
+namespace App\Models\Diseno;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Proyectos\Proyecto;
+use App\Models\Proyecto\Proyecto;
 
 class Diseno extends Model
 {

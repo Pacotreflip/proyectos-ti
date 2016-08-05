@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Solicitudes\Solicitud; 
-use App\Models\Proyectos\Proyecto;
+use App\Models\Solicitud\Solicitud; 
+use App\Models\Proyecto\Proyecto;
 use App\Http\Requests\StoreSolicitudRequest;
 
 class SolicitudesController extends Controller

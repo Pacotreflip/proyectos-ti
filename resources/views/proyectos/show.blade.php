@@ -4,8 +4,6 @@
 <h1>{{ $proyecto->nombre }}</h1>
 {!! Breadcrumbs::render('proyectos.show', $proyecto) !!}
 <hr>
-
-<div class="row">
   <div class="col-md-4 text-center">
     <a href="{{ route('proyecto.solicitudes.index', $proyecto)}}">
       <i class="fa fa-file fa-lg fa-5x"></i>

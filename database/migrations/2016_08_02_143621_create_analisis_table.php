@@ -27,10 +27,7 @@ class CreateAnalisisTable extends Migration
             /*
              * Foreign keys
              */
-            $table->foreign('id_proyecto')
-                ->references('id')
-                ->on('proyectos')
-                ->onDelete('cascade');
+            $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade');
         });
     }
 

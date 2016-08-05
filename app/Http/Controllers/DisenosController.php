@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as R;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Proyectos\Proyecto;
+use App\Models\Proyecto\Proyecto;
+use Laracasts\Flash\Flash;
+use App\Http\Requests\UpdateDisenoRequest;
 
 class DisenosController extends Controller
 {
@@ -74,9 +77,23 @@ class DisenosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDisenoRequest $request, $id)
     {
-        //
+        $proyecto = Proyecto::findOrFail($id);
+        $diseno = $proyecto->diseno;
+        
+        if(R::ajax()) {
+            $diseno->fecha_inicio = $request->fecha_inicio;
+            $diseno->fecha_fin = $request->fecha_fin;
+            $diseno->save();
+            
+            return response()->json([
+                'mensaje' => 'Fechas de la etapa DISEÑO establecidas correctamente.']);
+        } else {
+            Flash::success('Etapa de diseño fue actualizada con éxito, por favor espere la validación de los cambios por parte del administrador del  proyeto.');
+            return redirect()->route('proyecto.diseno.show', $proyecto);
+        }
+        
     }
 
     /**

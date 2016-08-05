@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Solicitudes;
+namespace App\Models\Solicitud;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
 use App\Models\Presenters\SolicitudPresenter;
-use App\Models\Proyectos\Proyecto;
-use App\Models\Documentos\Documento;
+use App\Models\Proyecto\Proyecto;
+use App\Models\Documento\Documento;
 
 class Solicitud extends Model
 {

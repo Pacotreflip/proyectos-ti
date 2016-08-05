@@ -10,7 +10,7 @@ class CreateDisenoTable extends Migration
      *
      * @return void
      */
-     public function up()
+    public function up()
     {
         Schema::create('diseno', function (Blueprint $table) {
             $table->increments('id');
@@ -27,10 +27,7 @@ class CreateDisenoTable extends Migration
             /*
              * Foreign keys
              */
-            $table->foreign('id_proyecto')
-                ->references('id')
-                ->on('proyectos')
-                ->onDelete('cascade');
+            $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade');
         });
     }
 
