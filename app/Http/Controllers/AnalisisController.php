@@ -85,6 +85,7 @@ class AnalisisController extends Controller
         $analisis->fecha_inicio = $request->fecha_inicio;
         $analisis->fecha_fin = $request->fecha_fin;
         $analisis->id_usuario = $request->id_usuario;
+        $analisis->save();
         
         Flash::success('Información de la etapa ANÁLISIS actualizada correctamente.');
         return redirect()->back();
