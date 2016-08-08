@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreDocumentoRequest;
 use App\Models\Documento\Documento;
 use App\Models\Solicitud\Solicitud;
+use App\Models\Solicitud\Solicitudes;
 
 class DocumentosController extends Controller
 {
@@ -44,22 +45,14 @@ class DocumentosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDocumentoRequest $request, $id_solicitud)
-    {   
-        $solicitud = Solicitud::findOrFail($id_solicitud);
+    public function store(StoreDocumentoRequest $request, $tipo, $id_etapa)
+    {  
         $file = $request->file('documento');
-        $extension = $file->getClientOriginalExtension();
-        $directory = 'uploads/documentos/';
-        $filename = sha1(time().time()).".{$extension}";
-        $nombre = $file->getClientOriginalName();
-        $documento = new Documento();
-        $documento->nombre = $nombre;
-        $documento->path = $directory . $filename;        
-        $file->move($directory, $filename);
-
-        $documento->id_solicitud = $solicitud->id;
-        $documento->save();
-        
+        switch($tipo) {
+            case 0:
+                $etapa = Solicitud::findOrFail($id_etapa);
+                $documento = (new Solicitudes($etapa))->attachDocumento($file);
+        }        
         if ($request->ajax()) {
             return response()->json($documento->path);
         }

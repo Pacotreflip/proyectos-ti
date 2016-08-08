@@ -24,15 +24,17 @@ class UpdateEtapaRequest extends Request
     public function rules()
     {
         return [
-            'fecha_inicio' => 'requided|date',
-            'fecha_fin' => 'required|date|after:'.$this->fecha_inicio.''
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after:'.$this->fecha_inicio.'',
+            'id_usuario' => 'required'
         ];
     }
     
     public function messages() {
         return [
             'fecha_inicio.required'  => 'La "Fecha Inicio Estimada" es obligatoria.',
-            'fecha_fin.required'  => 'La "Fecha Fin Estimada" es obligatoria.'            
+            'fecha_fin.required'  => 'La "Fecha Fin Estimada" es obligatoria.',
+            'id_usuario.required' => 'El campo "Responsable" es obligatorio'
         ];
     }
 }

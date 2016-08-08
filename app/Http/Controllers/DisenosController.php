@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Proyecto\Proyecto;
 use Laracasts\Flash\Flash;
-use App\Http\Requests\UpdateDisenoRequest;
+use App\Http\Requests\UpdateEtapaRequest;
 
 class DisenosController extends Controller
 {
@@ -77,7 +77,7 @@ class DisenosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDisenoRequest $request, $id)
+    public function update(UpdateEtapaRequest $request, $id)
     {
         $proyecto = Proyecto::findOrFail($id);
         $diseno = $proyecto->diseno;

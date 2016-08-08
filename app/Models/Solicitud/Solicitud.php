@@ -22,7 +22,7 @@ class Solicitud extends Model
     }
     
     public function documentos() {
-        return $this->hasMany(Documento::class, 'id_solicitud');
+        return $this->belongsToMany(Documento::class, 'solicitudes_documentos', 'id_solicitud', 'id_documento');
     }
     
     public static function tipos() {

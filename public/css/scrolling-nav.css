@@ -54,3 +54,13 @@ of those sections to manage the look and feel of the site. */
     padding-top: 50px;
     background: #eee;
 }
+
+.has-error .select2 {
+    border: 1px solid #a94442;
+    border-radius: 5px;
+}
+
+.has-success .select2 {
+    border: 1px solid #3c763d;
+    border-radius: 5px;
+}

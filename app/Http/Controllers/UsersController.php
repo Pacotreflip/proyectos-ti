@@ -25,13 +25,25 @@ class UsersController extends Controller
     {
         if(R::ajax()){
             $busqueda = $request->get('q');
-            $users = User::select(DB::raw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) AS full_name"))
-                    ->whereRaw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) LIKE '%$busqueda%'")
-                    ->lists("full_name");
-            return response()->json($users)                
-                ->setCallback($request->input('callback'));
-        }   
-    }
+            $users = User::select(DB::raw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) AS full_name, idusuario"))
+                    ->whereRaw("CONCAT(nombre, ' ', apaterno, ' ', amaterno) LIKE '%$busqueda%'");
+           
+            $data = [];
+            if($request->get('type') == 'autocomplete') {
+                $data = $users->lists('full_name');
+            }
+            if($request->get('type') == 'select2') {
+                $users = $users->lists('full_name', 'idusuario');
+                $data = [];
+                foreach($users as  $id => $user) {
+                    $data[] = ['id' => $id, 'text' => $user];
+                } 
+            }
+        }
+             
+        return response()->json($data);
+    }   
+    
 
     /**
      * Show the form for creating a new resource.

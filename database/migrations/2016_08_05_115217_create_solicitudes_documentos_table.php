@@ -13,10 +13,8 @@ class CreateSolicitudesDocumentosTable extends Migration
     public function up()
     {
         Schema::create('solicitudes_documentos', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('id_solicitud')->unsigned();
             $table->integer('id_documento')->unsigned();
-            $table->timestamps();
             $table->primary(['id_solicitud','id_documento']);
             
             $table->foreign('id_solicitud')->references('id')->on('solicitudes')->onDelete('cascade');

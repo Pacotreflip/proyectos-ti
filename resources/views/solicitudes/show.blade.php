@@ -43,7 +43,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('solicitud.documentos.destroy', [$solicitud, $documento])}}" method="POST">
+                                    <form action="{{ route('tipo.etapa.documentos.destroy', [0, $solicitud, $documento])}}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <button type="submit" class="btn btn-xs btn-danger" ><i class="fa fa-times"></i></button>
@@ -63,7 +63,7 @@
     </div>
 </div>
 <div class="row">
-    <form action="{{ route('solicitud.documentos.store', [$solicitud]) }}" class="dropzone" id="dropzone" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('tipo.etapa.documentos.store', [0, $solicitud]) }}" class="dropzone" id="dropzone" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
     </form>
 </div>
@@ -81,7 +81,7 @@
     };
     
     $('#documentos').dropzone({
-        url: '{{ route("solicitud.documentos.create", $solicitud->id) }}'
+        url: '{{ route("tipo.etapa.documentos.create", [0, $solicitud]) }}'
     });
 </script>
 @stop

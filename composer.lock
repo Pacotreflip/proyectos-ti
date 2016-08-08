@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6a2dec56f4a276d033c001f2cb13ceec",
-    "content-hash": "f972bea06f5478581081747c41b3e195",
+    "hash": "523e12ee39b9ac4f04ca6a01099550ad",
+    "content-hash": "5b49ee1399453742097a942d6618d136",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -165,6 +165,47 @@
                 "laravel"
             ],
             "time": "2015-02-08 21:44:39"
+        },
+        {
+            "name": "dhtmlx/connector-php",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DHTMLX/connector-php.git",
+                "reference": "918dcc77e75e44a42ed4570423c7813b264eb5d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DHTMLX/connector-php/zipball/918dcc77e75e44a42ed4570423c7813b264eb5d9",
+                "reference": "918dcc77e75e44a42ed4570423c7813b264eb5d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "yii2": "1.0.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Dhtmlx\\Connector\\": "codebase/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU"
+            ],
+            "description": "PHP extension for the DHTMLX library",
+            "homepage": "http://dhtmlx.com/docs/products/dhtmlxConnector/index.shtml",
+            "keywords": [
+                "connector",
+                "connector-php",
+                "dhtmlx"
+            ],
+            "time": "2016-06-10 13:39:04"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

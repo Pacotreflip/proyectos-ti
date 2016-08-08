@@ -59,7 +59,7 @@ class Proyectos {
         $this->agregaEtapas();
         
         return [
-            'proyecto' => $this-proyecto, 
+            'proyecto' => $this->proyecto, 
             'solicitud' => $solicitud
         ];
     }

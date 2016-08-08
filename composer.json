@@ -13,7 +13,8 @@
         "laravelcollective/html": "5.1.*",
         "intervention/image": "^2.3",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "dhtmlx/connector-php": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

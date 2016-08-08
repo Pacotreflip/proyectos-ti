@@ -11,7 +11,7 @@
 |
 */
 Route::resource('proyectos', 'ProyectosController');
-Route::resource('solicitud.documentos', 'DocumentosController');
+Route::resource('tipo.etapa.documentos', 'DocumentosController');
 Route::resource('proyecto.solicitudes', 'SolicitudesController');
 Route::resource('analisis.informacion', 'InformacionController');
 
@@ -30,7 +30,7 @@ Route::get('proyecto/{proyecto}/diseno/edit', 'DisenosController@edit')->name('p
 Route::patch('proyecto/{proyecto}/diseno/update', 'DisenosController@update')->name('proyecto.diseno.update');
 
 Route::group(['prefix' => 'api'], function () {
-    Route::get('users', 'UsersController@index');
+    Route::get('users', 'UsersController@index')->name('api.users.index');
 });
 
 Route::get('/', 'PagesController@home')->name('home');
