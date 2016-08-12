@@ -14,6 +14,9 @@ Route::resource('proyectos', 'ProyectosController');
 Route::resource('tipo.etapa.documentos', 'DocumentosController');
 Route::resource('proyecto.solicitudes', 'SolicitudesController');
 Route::resource('analisis.informacion', 'InformacionController');
+Route::resource('analisis.documentos', 'InformacionController');
+Route::resource('users', 'UsersController');
+Route::resource('preguntas', 'PreguntasController');
 
 //Etapas
 Route::get('proyecto/{proyecto}/etapas', 'PagesController@etapas')->name('proyecto.etapas.index');

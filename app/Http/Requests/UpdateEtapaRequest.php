@@ -32,8 +32,8 @@ class UpdateEtapaRequest extends Request
     
     public function messages() {
         return [
-            'fecha_inicio.required'  => 'La "Fecha Inicio Estimada" es obligatoria.',
-            'fecha_fin.required'  => 'La "Fecha Fin Estimada" es obligatoria.',
+            'fecha_inicio.required'  => 'La "Fecha Inicio Estimada" es obligatoria',
+            'fecha_fin.required'  => 'La "Fecha Fin Estimada" es obligatoria',
             'id_usuario.required' => 'El campo "Responsable" es obligatorio'
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Models\Documento;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Solicitud\Solicitud;
+use App\Models\Analisis\Analisis;
 
 class Documento extends Model
 {
@@ -14,5 +15,9 @@ class Documento extends Model
     
     public function solicitud() {
         return $this->belongsTo(Solicitud::class, 'id_solicitud');
+    }
+    
+    public function analisis() {
+        return $this->belongsTo(Analisis::class, 'id_analisis');
     }
 }

@@ -6,32 +6,38 @@
 <hr>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" id="informacion">Información</button>
+    <button type="button" class="btn btn-default selector" id="informacion">Recopilación de Información</button>
   </div>
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" id="documentacion">Documentación</button>
+    <button type="button" class="btn btn-default" id="documentos">Documentación</button>
   </div>
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-default" id="requerimientos">Requerimientos</button>
   </div>
 </div>
+<section class="first-section">  
+</section>
 <section id="content" class="second-section">
+  
 </section>
 
 @stop
 @section('scripts')
 <script>
-  $('#informacion').off().on('click', function (e) {
-      $.ajax({
-        url: '{{ route("analisis.informacion.show", $analisis)}}',
+  $('.selector').off().on('click', function (e) {
+        var seccion = $(this).attr('id');
+        e.preventDefault();
+        $(this).focus();
+        $.ajax({
+        url: App.host + '/analisis/{{$analisis->id}}/' + seccion,
         type: 'GET',
         success: function (source) {
-          $('#content').html(source);
+          $('#content').hide(250).html(source).show(250);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
         }
       });
-  }
+  });
 </script>
 @stop

@@ -31,6 +31,9 @@ class UsersController extends Controller
             $data = [];
             if($request->get('type') == 'autocomplete') {
                 $data = $users->lists('full_name');
+                return response()->json($data)                
+                        ->setCallback($request->input('callback'));
+
             }
             if($request->get('type') == 'select2') {
                 $users = $users->lists('full_name', 'idusuario');
@@ -38,10 +41,11 @@ class UsersController extends Controller
                 foreach($users as  $id => $user) {
                     $data[] = ['id' => $id, 'text' => $user];
                 } 
+                return response()->json($data);
             }
         }
              
-        return response()->json($data);
+        
     }   
     
 

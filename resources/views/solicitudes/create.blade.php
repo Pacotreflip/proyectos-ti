@@ -65,13 +65,14 @@
                 url: App.host + '/api/users',
                 dataType: 'jsonp',
                 data: {
-                    q: request.term
+                    q: request.term,
+                    type: 'autocomplete'
                 },
                 success: function(data) {
                     response( data );
                 },
                 error: function(error) {
-                    
+                    console.log(error);
                 }
             });
         }

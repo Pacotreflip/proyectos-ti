@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Analisis\Analisis;
+use App\Models\Analisis\Pregunta;
 
 class InformacionController extends Controller
 {
@@ -15,9 +16,13 @@ class InformacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_analisis)
     {
-        //
+        $analisis = Analisis::findOrFail($id_analisis);
+        $preguntas = $analisis->preguntas;
+        
+        return view('analisis.informacion.index')
+        ->with('preguntas', $preguntas);
     }
 
     /**
@@ -28,7 +33,7 @@ class InformacionController extends Controller
     public function create($id_analisis)
     {
         $analisis = Analisis::findOrFail($id_analisis);
-        return view('informacion.create')
+        return view('analisis.informacion.create')
                 ->with('analisis', $analisis);
     }
 

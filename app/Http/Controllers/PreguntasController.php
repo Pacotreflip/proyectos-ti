@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request as R;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Proyecto\Proyecto;
-use Laracasts\Flash\Flash;
-use App\Http\Requests\UpdateEtapaRequest;
-use App\Models\Diseno\Diseno;
+use App\Models\Analisis\Pregunta;
+use App\Http\Requests\StorePreguntaRequest;
 
-class DisenosController extends Controller
+class PreguntasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +18,10 @@ class DisenosController extends Controller
      */
     public function index()
     {
-        //
+        $preguntas = Pregunta::paginate(15);
+        
+        return view('catalogos.preguntas.index')
+        ->with('preguntas', $preguntas);
     }
 
     /**
@@ -31,7 +31,7 @@ class DisenosController extends Controller
      */
     public function create()
     {
-        //
+        return view('catalogos.preguntas.create');
     }
 
     /**
@@ -40,9 +40,12 @@ class DisenosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePreguntaRequest $request)
     {
-        //
+        Pretunga::create($request->all());
+        
+        Flash::success('Pregunta creada con éxito');
+        return redirect()->back();
     }
 
     /**
@@ -51,13 +54,9 @@ class DisenosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id_proyecto)
+    public function show($id)
     {
-        $proyecto = Proyecto::findOrFail($id_proyecto);
         
-        return view('disenos.show')
-                ->with('proyecto', $proyecto)
-                ->with('diseno', $proyecto->diseno);
     }
 
     /**
@@ -78,23 +77,9 @@ class DisenosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEtapaRequest $request, $id_proyecto)
+    public function update(Request $request, $id)
     {
-        $proyecto = Proyecto::findOrFail($id_proyecto);
-        $diseno = $proyecto->diseno;
-        
-        $diseno->fecha_inicio = $request->fecha_inicio;
-        $diseno->fecha_fin = $request->fecha_fin;
-        $diseno->id_usuario = $request->id_usuario;
-        $diseno->save();
-
-        $data = [
-            'success' => 'Información de la etapa DISEÑO actualizada correctamente.'
-        ];
-        
-        return response()->json($data);
-        
-        
+        //
     }
 
     /**

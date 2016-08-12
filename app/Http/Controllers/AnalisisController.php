@@ -79,16 +79,21 @@ class AnalisisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEtapaRequest $request, $id)
+    public function update(UpdateEtapaRequest $request, $id_proyecto)
     {
-        $analisis = \App\Models\Analisis\Analisis::findOrFail($id);
+        $proyecto = Poryecto::findOrFail($id_proyecto);
+        $analisis = $proyecto->analisis;
+        
         $analisis->fecha_inicio = $request->fecha_inicio;
         $analisis->fecha_fin = $request->fecha_fin;
         $analisis->id_usuario = $request->id_usuario;
         $analisis->save();
         
-        Flash::success('Información de la etapa ANÁLISIS actualizada correctamente.');
-        return redirect()->back();
+        $data = [
+            'success' => 'Información de la etapa ANÁLISIS actualizada correctamente.'
+        ];
+        
+        return response()->json($data);
     }
 
     /**

@@ -67,7 +67,7 @@
     
     <!-- dhtmlxgantt JavaScript -->
     <script src="{{ asset('js/dhtmlxgantt.js') }}"></script>
-
+    
     <script>
       $(function () {
         $.ajaxSetup({

@@ -15,10 +15,13 @@
     </div>
 @endif
 
+    <div class="errores">
+    </div>
+
 @foreach($proyecto->etapas() as $key => $etapa)
-<div class="text-center">
+<div class="text-center {{$etapa->getTable()}}">
     <div class="col-md-12">
-      <h4>{{ $key }}</h4>
+      <h4><a href="{{ route('proyecto.'.$etapa->getTable().'.show', $proyecto)}}">{{ $key }}</a></h4>
     </div>
     {!! Form::model($etapa, ['route' => ['proyecto.'.$etapa->getTable().'.update', $proyecto], 'method' => 'PATCH'], ['class' => 'form-horizontal']) !!}
     <div class="col-md-3">
@@ -92,11 +95,37 @@
             type: 'POST',
             data: form.serialize(),
             success: function (response) {
-                console.log(response);
+                swal('',response.success, 'success');
+                $('.errores').empty();
+                $.each(($('div.'+etapa+' .has-error')), function ( i, element) {
+                    $(element).removeClass('has-error').addClass('has-success');
+                });              
             },
-            error: function (error) {
-                console.log(error);
-            }
+            error: function(xhr, responseText, thrownError) {
+                    var ind1 = xhr.responseText.indexOf('<span class="exception_message">');
+
+                    if(ind1 === -1){
+                        var salida = '<div class="alert alert-danger" role="alert"><ul>';
+                        $.each($.parseJSON(xhr.responseText), function (ind, elem) { 
+                            salida += '<li>'+elem+'</li>';
+                        });
+                        salida += '</ul></div>';
+                        $(".errores").html(salida);
+                    }else{
+                        var salida = '<div class="alert alert-danger" role="alert"><strong>Errores: </strong> <br> <br><ul >';
+                        var ind1 = xhr.responseText.indexOf('<span class="exception_message">');
+                        var cad1 = xhr.responseText.substring(ind1);
+                        var ind2 = cad1.indexOf('</span>');
+                        var cad2 = cad1.substring(32,ind2);
+                        if(cad2 !== ""){
+                            salida += '<li><p><strong>¡ERROR GRAVE!: </strong></p><p>'+cad2+'</p></li>';
+                        }else{
+                            salida += '<li>Un error grave ocurrió. Por favor intente otra vez.</li>';
+                        }
+                        salida += '</ul></div>';
+                        $(".errores").html(salida);
+                    }
+                }
         });
     });
 </script>

@@ -11,6 +11,8 @@ use App\Http\Requests\StoreDocumentoRequest;
 use App\Models\Documento\Documento;
 use App\Models\Solicitud\Solicitud;
 use App\Models\Solicitud\Solicitudes;
+use App\Models\Analisis\Analisis;
+use App\Models\Analisis\Analisis_;
 
 class DocumentosController extends Controller
 {
@@ -52,7 +54,13 @@ class DocumentosController extends Controller
             case 0:
                 $etapa = Solicitud::findOrFail($id_etapa);
                 $documento = (new Solicitudes($etapa))->attachDocumento($file);
+                break;
+            case 1:
+                $etapa = Analisis::findOrFail($id_etapa);
+                $documento = (new Analisis_($etapa))->attachDocumento($file);
+                break;
         }        
+        
         if ($request->ajax()) {
             return response()->json($documento->path);
         }
@@ -98,7 +106,7 @@ class DocumentosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_solicitud, $id)
+    public function destroy($tipo, $id)
     {
        $documento = Documento::findOrFail($id);
         $files = in_array($documento->thumbnail_path, [
